@@ -3,7 +3,13 @@
 import itertools
 import string
 
-letters = list(string.ascii_letters)
-for L in range(0, len(letters)+1):
-  for subset in itertools.combinations(letters, L):
-    print("".join(subset))
+LETTERS = list(string.ascii_letters)
+
+def combinations():
+    for L in range(0, len(LETTERS)+1):
+        for subset in itertools.combinations(LETTERS, L):
+            yield "".join(subset)
+
+if __name__ == '__main__':
+        for combination in combinations():
+            print(combination)
