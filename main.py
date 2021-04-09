@@ -6,7 +6,7 @@ import string
 LETTERS = list(string.ascii_letters)
 
 def combinations():
-    for L in range(0, len(LETTERS)+1):
+    for L in range(len(LETTERS)+1):
         for subset in itertools.combinations(LETTERS, L):
             yield "".join(subset)
 
