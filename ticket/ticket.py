@@ -18,15 +18,15 @@ class TicketManager(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    @commands.command(help = 'Link source code', aliases = ['s'])
+    @commands.command(help='Link source code', aliases=['s'])
     async def source(self, ctx: commands.Context) -> None:
         embed = TicketEmbed(
-            title = 'Check out my source code!',
-            url = SOURCE_LINK
+            title='Check out my source code!',
+            url=SOURCE_LINK
         )
         await ctx.send(embed=embed)
 
-    @commands.command(help = 'Link support server', aliases = ['su'])
+    @commands.command(help='Link support server', aliases=['su'])
     async def support(self, ctx: commands.Context):
         await ctx.send(SUPPORT_SERVER)
 
