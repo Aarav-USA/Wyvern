@@ -18,6 +18,10 @@ class TicketManager(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
+    @commands.command(help='Say hi')
+    async def hi(self, ctx: commands.Context) -> None:
+        await ctx.send('Hi!')
+
     @commands.command(help='Link source code', aliases=['s'])
     async def source(self, ctx: commands.Context) -> None:
         embed = TicketEmbed(
