@@ -45,13 +45,10 @@ class TicketManager(commands.Cog):
             return
         await self.setup_channel.send('Am I spamming?')
 
-<<<<<<< HEAD
     @commands.command(help='Say hi')
     async def hi(self, ctx: commands.Context) -> None:
         await ctx.send('Hi!')
 
-    @commands.command(help='Link source code', aliases=['s'])
-=======
     @commands.command(help='Set setup channel', aliases=['s'])
     async def setup(self, ctx: commands.Context) -> None:
         if self.__setup_user is not None:
@@ -61,7 +58,6 @@ class TicketManager(commands.Cog):
             await ctx.send('Which channel would you like me to set up in?')
 
     @commands.command(help='Link source code')
->>>>>>> b05671cfb610e36e91f712161a66b84abeb36e7c
     async def source(self, ctx: commands.Context) -> None:
         embed = TicketEmbed(
             title='Check out my source code!',
@@ -78,7 +74,7 @@ class TicketManager(commands.Cog):
         if msg.author == self.__setup_user:
             channel_id = extract_channel(msg.content)
             if channel_id is not None:
-               channel = self.bot.get_channel(channel_id)
+                channel = self.bot.get_channel(channel_id)
                 self.setup_channel = channel
                 await msg.channel.send(f'Setting up in {channel_id}...')
                 await self.__send_setup_message()
