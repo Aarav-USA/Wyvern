@@ -10,6 +10,11 @@ from discord.ext import commands
 # a variable called bot.
 bot = commands.Bot('hc!')
 
+# Command to kick yourself.
+@bot.command()
+async def kickme(ctx):
+    await ctx.author.kick()
+
 # Under here we will put our commands, we don't have any yet.
 
 
