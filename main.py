@@ -5,7 +5,7 @@ from discord.ext import commands
 BOT_PREFIX: str = 'hc!'
 
 bot: commands.Bot = commands.Bot(BOT_PREFIX)
-bot.load_extension('ticket/ticket')
+bot.load_extension('ticket.ticket')
 
 if __name__ == '__main__':
 
