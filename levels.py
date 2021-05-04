@@ -19,3 +19,11 @@ with open('ticket/token.txt', 'r') as token_file:
 
 # This starts the bot up.
 bot.run(token)
+
+#Reaction roles
+@client.command()
+async def reactionrole(ctx, emoji, role: discord.Role,*,message):
+
+    emb = discord.Embed(description=message)
+    msg = await ctx.channel.send(embed=emb)
+    await msg.add_reaction(emoji)
