@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 import re
 
 import discord
@@ -12,7 +12,7 @@ def extract_channel(content: str) -> Optional[str]:
     regex: str = '<#[0-9]{18}>'
     matched = re.findall(regex, content)
     if matched:
-        return str(matched[0])
+        return matched[0]
     return None 
 
 class TicketEmbed(discord.Embed):
@@ -41,6 +41,7 @@ class TicketManager(commands.Cog):
             await ctx.send('No setup is in progress.')
 
     async def __send_setup_message(self) -> None:
+        print(f'Setup channel is {self.setup_channel}')
         if self.setup_channel is None:
             return
         await self.setup_channel.send('Am I spamming?')
@@ -74,7 +75,9 @@ class TicketManager(commands.Cog):
         if msg.author == self.__setup_user:
             channel_id = extract_channel(msg.content)
             if channel_id is not None:
-                channel = self.bot.get_channel(channel_id)
+                raw_channel = int(channel_id[2:-2])
+                print(f'Extracted channel ID {raw_channel}')
+                channel = self.bot.get_channel(raw_channel)
                 self.setup_channel = channel
                 await msg.channel.send(f'Setting up in {channel_id}...')
                 await self.__send_setup_message()
