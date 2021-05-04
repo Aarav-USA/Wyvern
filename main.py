@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-import itertools
-import string
+from discord.ext import commands
 
-LETTERS = list(string.ascii_letters)
+BOT_PREFIX: str = 'hc!'
 
-def combinations():
-    for L in range(len(LETTERS)+1):
-        for subset in itertools.combinations(LETTERS, L):
-            yield "".join(subset)
+bot: commands.Bot = commands.Bot(BOT_PREFIX)
+bot.load_extension('ticket.ticket')
 
 if __name__ == '__main__':
-        for combination in combinations():
-            print(combination)
+
+    with open('token.txt', 'r') as f:
+        token:str = f.readline().strip()
+
+    bot.run(token)
