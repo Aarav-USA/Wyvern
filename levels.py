@@ -15,8 +15,15 @@ bot = commands.Bot('hc!')
 async def kickme(ctx):
     await ctx.author.kick()
 
-# Under here we will put our commands, we don't have any yet.
+# Under here we will put our commands.
 
+#Reaction roles
+@bot.command()
+async def reactionrole(ctx, emoji, role: discord.Role,*,message):
+
+    emb = discord.Embed(description=message)
+    msg = await ctx.channel.send(embed=emb)
+    await msg.add_reaction(emoji)
 
 # This opens the token.txt file and reads the token out of it.
 with open('ticket/token.txt', 'r') as token_file:
@@ -24,11 +31,3 @@ with open('ticket/token.txt', 'r') as token_file:
 
 # This starts the bot up.
 bot.run(token)
-
-#Reaction roles
-@client.command()
-async def reactionrole(ctx, emoji, role: discord.Role,*,message):
-
-    emb = discord.Embed(description=message)
-    msg = await ctx.channel.send(embed=emb)
-    await msg.add_reaction(emoji)

@@ -2,7 +2,20 @@ import discord
 import json
 from discord.ext import commands
 
+class ReactRole(commands.Cog):
 
+    def __init__(self, bot: commands.Bot) -> None:
+        self.bot = bot
+
+    @commands.command()
+    async def reactrole(self, ctx: commands.Context, emoji: str,
+            role: discord.Role, *, message: str):
+        emb = discord.Embed(description=message)
+        msg = await ctx.channel.send(embed=emb)
+        await msg.add_reaction(emoji)
+
+        # TODO save reaction in JSON file
+        
 client = commands.Bot(command_prefix="hc!",intents=discord.Intents.all())
 
 @client.event
@@ -47,3 +60,7 @@ async def reactrole(ctx, emoji, role: discord.Role,*,message):
         json.dump(data,j, indent= 4)
 
 client.run("ODMwMzEwNjIwMDU0MjkwNDcz.YHE1Bg.2Q-1Rnz6pfbvJkyCcQigAuBeiCY")
+
+def setup(bot: commands.Bot):
+    print('Loading reactrole extension...')
+    return ReactRole(bot)
