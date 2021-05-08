@@ -2,20 +2,39 @@ import discord
 import json
 from discord.ext import commands
 
+JSON_FILE = 'reactions.json'
+
 class ReactRole(commands.Cog):
 
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot, json_file: str) -> None:
         self.bot = bot
+        self.json_file = json_file
 
+    # Saves a react role to the JSON file; does not catch exceptions.
+    def __save_role_record(self, emoji: str, role: discord.Role,
+            msg: discord.Message) -> None:
+        role_record = {
+            'role_name' : role.name,
+            'role_id' : role.id,
+            'emoji' : emoji,
+            'message_id' : msg.id
+        }
+
+        with open(self.json_file, 'w') as file_handle:
+            react_roles = json.load(file_handle)
+        react_roles.append(role_record)
+
+        with open(self.json_file, 'r') as file_handle:
+            json.dump(react_roles, file_handle, indent=4)
+            
     @commands.command()
     async def reactrole(self, ctx: commands.Context, emoji: str,
             role: discord.Role, *, message: str):
         emb = discord.Embed(description=message)
         msg = await ctx.channel.send(embed=emb)
         await msg.add_reaction(emoji)
+        self.__save_role_record(emoji, role, msg)
 
-        # TODO save reaction in JSON file
-        
 client = commands.Bot(command_prefix="hc!",intents=discord.Intents.all())
 
 @client.event
@@ -36,31 +55,9 @@ async def on_raw_reaction_add(payload):
 
                     await client.get_guild(payload.guild_id).get_member(payload.user_id).remove_roles(role)
 
-@client.command()
-async def reactrole(ctx, emoji, role: discord.Role,*,message):
-
-    emb = discord.Embed(description=message)
-    msg = await ctx.channel.send(embed=emb)
-    await msg.add_reaction(emoji)
-
-    with open('reactrole') as json_file:
-        data = json.load(json_file)
-
-        new_react_role = {
-            'role_name':role.name,
-            'role_id':role.id,
-            'emoji': emoji,
-            'message_id':msg.id
-        }
-
-        data.append(new_react_role)
-
-
-    with open('reactrole.json','w') as j:
-        json.dump(data,j, indent= 4)
-
+client.add_cog(ReactRole(client, JSON_FILE))
 client.run("ODMwMzEwNjIwMDU0MjkwNDcz.YHE1Bg.2Q-1Rnz6pfbvJkyCcQigAuBeiCY")
 
 def setup(bot: commands.Bot):
     print('Loading reactrole extension...')
-    return ReactRole(bot)
+    return ReactRole(bot, JSON_FILE)
