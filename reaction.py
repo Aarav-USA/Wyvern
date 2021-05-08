@@ -56,7 +56,9 @@ async def on_raw_reaction_add(payload):
                     await client.get_guild(payload.guild_id).get_member(payload.user_id).remove_roles(role)
 
 client.add_cog(ReactRole(client, JSON_FILE))
-client.run("ODMwMzEwNjIwMDU0MjkwNDcz.YHE1Bg.2Q-1Rnz6pfbvJkyCcQigAuBeiCY")
+
+if __name__ == '__main__':
+    client.run("ODMwMzEwNjIwMDU0MjkwNDcz.YHE1Bg.2Q-1Rnz6pfbvJkyCcQigAuBeiCY")
 
 def setup(bot: commands.Bot):
     print('Loading reactrole extension...')
