@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import discord
 import json
+from typing import Optional
 from discord.ext import commands
 
 JSON_FILE = 'reactions.json'
@@ -11,7 +14,7 @@ class ReactRole(commands.Cog):
         self.json_file = json_file
 
     # Saves a react role to the JSON file; does not catch exceptions.
-    def __save_role_record(self, emoji: str, role: discord.Role,
+    async def __save_role_record(self, emoji: str, role: discord.Role,
             msg: discord.Message) -> None:
         role_record = {
             'role_name' : role.name,
@@ -20,46 +23,62 @@ class ReactRole(commands.Cog):
             'message_id' : msg.id
         }
 
-        with open(self.json_file, 'w') as file_handle:
+        with open(self.json_file, 'r') as file_handle:
             react_roles = json.load(file_handle)
         react_roles.append(role_record)
 
-        with open(self.json_file, 'r') as file_handle:
+        with open(self.json_file, 'w') as file_handle:
             json.dump(react_roles, file_handle, indent=4)
             
+    # Get the reaction role id corresponding to the given emoji, or None.
+    async def __role_id_from_record(self, emoji: str,
+            message_id: int) -> Optional[int]:
+        with open(self.json_file, 'r') as file_handle:
+            react_roles: list[dict[str, str]] = json.load(file_handle)
+
+        for role_record in react_roles:
+            if role_record['emoji'] == emoji \
+                    and role_record['message_id'] == message_id:
+                return int(role_record['role_id'])
+        return None
+
     @commands.command()
     async def reactrole(self, ctx: commands.Context, emoji: str,
-            role: discord.Role, *, message: str):
+            role: discord.Role, *, message: str) -> None:
         emb = discord.Embed(description=message)
         msg = await ctx.channel.send(embed=emb)
         await msg.add_reaction(emoji)
-        self.__save_role_record(emoji, role, msg)
+        await self.__save_role_record(emoji, role, msg)
 
-client = commands.Bot(command_prefix="hc!",intents=discord.Intents.all())
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self,
+            payload: discord.RawReactionActionEvent) -> None:
+        emoji, message_id = payload.emoji.name, payload.message_id
+        # Mypy thinks these types are optional
+        if emoji is None or payload.guild_id is None:
+            return
+        role_id = await self.__role_id_from_record(emoji, message_id)
+        if role_id is None:
+            return
 
-@client.event
-async def on_ready():
-    print("The bot is now online")
-    print("----------------------------------------------")
+        guild = self.bot.get_guild(payload.guild_id)
+        if guild is None:
+            print('Failed to get guild.')
+            return
 
-@client.event
-async def on_raw_reaction_add(payload):
+        role = discord.utils.get(guild.roles,
+            id=role_id)
+        if role is None:
+            print('Failed to get role.')
+            return
 
+        member = guild.get_member(payload.user_id)
+        if member is None:
+            print('Failed to get member.')
+            return
 
-        with open('reactrole.json') as react_file:
+        await member.add_roles(role)
 
-            data = json.load(react_file)
-            for x in data:
-                if x['emoji'] == payload.emoji.name and x['message_id'] == payload.message_id:
-                    role = discord.utils.get(client.get_guild(payload.guild_id).roles, id=x['role_id'])
-
-                    await client.get_guild(payload.guild_id).get_member(payload.user_id).remove_roles(role)
-
-client.add_cog(ReactRole(client, JSON_FILE))
-
-if __name__ == '__main__':
-    client.run("ODMwMzEwNjIwMDU0MjkwNDcz.YHE1Bg.2Q-1Rnz6pfbvJkyCcQigAuBeiCY")
-
-def setup(bot: commands.Bot):
+def setup(bot: commands.Bot) -> None:
     print('Loading reactrole extension...')
-    return ReactRole(bot, JSON_FILE)
+    bot.add_cog(ReactRole(bot, JSON_FILE))
