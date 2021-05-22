@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Any, Optional, Union
 import re
 
 import discord
@@ -10,14 +10,14 @@ SUPPORT_SERVER: str = 'https://discord.gg/Q2CTzHyk'
 # Returns the first channel if one is found in content, or None.
 def extract_channel(content: str) -> Optional[str]:
     regex: str = '<#[0-9]{18}>'
-    matched = re.findall(regex, content)
+    matched: list[str] = re.findall(regex, content)
     if matched:
         return matched[0]
     return None 
 
 class TicketEmbed(discord.Embed):
 
-    def __init__(self, *args: int, **kargs: str) -> None:
+    def __init__(self, *args: Any, **kargs: Any) -> None:
         super().__init__(*args, **kargs)
         # gold
         self.colour = 0xFFD700
@@ -28,9 +28,9 @@ class TicketManager(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
         # Channel the bot is set up in
-        self.setup_channel: Optional[discord.Channel]
+        self.setup_channel: Optional[discord.TextChannel] = None
         # User currently in setup process
-        self.__setup_user: Optional[discord.User] = None
+        self.__setup_user: Optional[Union[discord.User, discord.Member]] = None
 
     @commands.command(help='Cancel setup', aliases=['c'])
     async def cancel(self, ctx: commands.Context) -> None:
@@ -67,7 +67,7 @@ class TicketManager(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(help='Link support server', aliases=['su'])
-    async def support(self, ctx: commands.Context):
+    async def support(self, ctx: commands.Context) -> None:
         await ctx.send(SUPPORT_SERVER)
 
     @commands.Cog.listener()
@@ -78,6 +78,9 @@ class TicketManager(commands.Cog):
                 raw_channel = int(channel_id[2:-2])
                 print(f'Extracted channel ID {raw_channel}')
                 channel = self.bot.get_channel(raw_channel)
+                if not isinstance(channel, discord.TextChannel):
+                    await msg.channel.send('That isn\'t a text channel!')
+                    return
                 self.setup_channel = channel
                 await msg.channel.send(f'Setting up in {channel_id}...')
                 await self.__send_setup_message()
@@ -90,6 +93,6 @@ class TicketManager(commands.Cog):
         await ctx.send(str(error))
         
 
-def setup(bot):
+def setup(bot: commands.Bot) -> None:
     print('Loading ticket manager extension...')
     bot.add_cog(TicketManager(bot))
