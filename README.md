@@ -6,6 +6,6 @@ Welcome to this repository, this is the official code for the HoneyComb Discord 
 
 HoneyComb contains a WIP ticket bot/cog.
 
-#Reaction
+# Reaction
 
 HoneyComb contains a Reaction Role system bot/cog
