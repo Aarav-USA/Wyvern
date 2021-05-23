@@ -8,4 +8,4 @@ HoneyComb contains a WIP ticket bot/cog.
 
 # Reaction
 
-HoneyComb contains a Reaction Role system bot/cog
+HoneyComb contains a Reaction Role bot/cog.
