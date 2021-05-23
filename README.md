@@ -1,5 +1,5 @@
 # HoneyComb
-You can put this (Python) code inside a repl.it or another executer like Python Interpreter, to generate permutations without repetitions. This code could be used for cracking hard codes or for figuring out math problems. This repository also contains other peices of code for robots with Discord.
+Welcome to this repository, this is the official code for the HoneyComb Discord robot! Check out our code and maybe implement it into your own. Make sure you follow all license terms. Support us at https://gofund.me/ce991681
 
 # TicketManager
 
