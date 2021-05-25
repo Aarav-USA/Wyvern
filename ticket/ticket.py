@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 SOURCE_LINK: str = 'https://github.com/XxMidasTouchxX/HoneyComb.git'
-SUPPORT_SERVER: str = 'https://discord.gg/Q2CTzHyk'
+SUPPORT_SERVER: str = 'https://discord.gg/ZAM9M2ChBE'
 
 # Returns the first channel if one is found in content, or None.
 def extract_channel(content: str) -> Optional[str]:
