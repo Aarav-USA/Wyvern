@@ -1,5 +1,4 @@
 from typing import Any, Optional, Union
-import re
 
 import discord
 from discord.ext import commands
