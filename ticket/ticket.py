@@ -4,16 +4,8 @@ import re
 import discord
 from discord.ext import commands
 
-SOURCE_LINK: str = 'https://github.com/XxMidasTouchxX/HoneyComb.git'
-SUPPORT_SERVER: str = 'https://discord.gg/ZAM9M2ChBE'
-
-# Returns the first channel if one is found in content, or None.
-def extract_channel(content: str) -> Optional[str]:
-    regex: str = '<#[0-9]{18}>'
-    matched: list[str] = re.findall(regex, content)
-    if matched:
-        return matched[0]
-    return None 
+SOURCE_LINK = 'https://github.com/XxMidasTouchxX/HoneyComb.git'
+SUPPORT_SERVER = 'https://discord.gg/ZAM9M2ChBE'
 
 class TicketEmbed(discord.Embed):
 
@@ -21,7 +13,6 @@ class TicketEmbed(discord.Embed):
         super().__init__(*args, **kargs)
         # gold
         self.colour = 0xFFD700
-        
 
 class TicketManager(commands.Cog):
 
@@ -73,19 +64,19 @@ class TicketManager(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, msg: discord.Message) -> None:
         if msg.author == self.__setup_user:
-            channel_id = extract_channel(msg.content)
-            if channel_id is not None:
-                raw_channel = int(channel_id[2:-2])
-                print(f'Extracted channel ID {raw_channel}')
-                channel = self.bot.get_channel(raw_channel)
-                if not isinstance(channel, discord.TextChannel):
-                    await msg.channel.send('That isn\'t a text channel!')
-                    return
-                self.setup_channel = channel
-                await msg.channel.send(f'Setting up in {channel_id}...')
-                await self.__send_setup_message()
-                self.__setup_user = None
-                await msg.channel.send('Setup complete.')
+            if len(msg.channel_mentions) > 0:
+                channel = msg.channel_mentions[0]
+            else:
+                return
+
+            if not isinstance(channel, discord.TextChannel):
+                await msg.channel.send('That isn\'t a text channel!')
+                return
+            self.setup_channel = channel
+            await msg.channel.send(f'Setting up in {channel}...')
+            await self.__send_setup_message()
+            self.__setup_user = None
+            await msg.channel.send('Setup complete.')
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context,
