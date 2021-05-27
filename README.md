@@ -1,6 +1,6 @@
 # HoneyComb
 
-Welcome to this repository, this is the official code for the HoneyComb Discord robot! Check out our code and maybe implement it into your own. Make sure you follow all license terms. Support us at https://gofund.me/ce991681.
+Welcome to this repository, this is the official code for the HoneyComb Discord robot! Check out our code and maybe implement it into your own. Make sure you follow all license terms. Support us at https://discord.gg/Rb9ZDmH89c or get support at https://discord.gg/ZAM9M2ChBE.
 
 # TicketManager
 
