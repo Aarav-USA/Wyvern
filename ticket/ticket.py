@@ -4,13 +4,6 @@ from typing import Any, Optional, Union
 import discord
 from discord.ext import commands
 
-class TicketEmbed(discord.Embed):
-
-    def __init__(self, *args: Any, **kargs: Any) -> None:
-        super().__init__(*args, **kargs)
-        # gold
-        self.colour = 0xFFD700
-
 class TicketManager(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
