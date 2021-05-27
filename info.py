@@ -26,3 +26,6 @@ class Info(commands.Cog):
 def setup(bot: commands.Bot) -> None:
     print('Loading info extension...')
     bot.add_cog(Info(bot))
+    
+    # Setting `Watching ` status
+await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for @HoneyComb"))
