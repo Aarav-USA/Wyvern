@@ -1,7 +1,6 @@
 from discord.ext import commands
 
-# TODO TicketEmbed should be moved to a utility file.
-from ticket.ticket import TicketEmbed
+import util
 
 SOURCE_LINK = 'https://github.com/XxMidasTouchxX/HoneyComb.git'
 SUPPORT_SERVER = 'https://discord.gg/ZAM9M2ChBE'
@@ -14,7 +13,7 @@ class Info(commands.Cog):
 
     @commands.command(help='Link source code')
     async def source(self, ctx: commands.Context) -> None:
-        embed = TicketEmbed(
+        embed = util.HoneyCombEmbed(
             title='Check out my source code!',
             url=SOURCE_LINK
         )
