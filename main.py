@@ -5,7 +5,6 @@ from discord.ext import commands
 
 BOT_PREFIX: str = 'hc!'
 
-bot: commands.Bot = commands.Bot(BOT_PREFIX, intents=discord.Intents.all())
 bot.load_extension('info')
 bot.load_extension('moderation')
 bot.load_extension('ticket.ticket')
