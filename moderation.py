@@ -6,17 +6,17 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    @commands.command(help='ban a user')
+    @commands.command(help='Bans a user')
     async def ban(self, ctx: commands.Context, user: discord.User) -> None:
         await ctx.send('Not Implemented')
         raise NotImplementedError()
 
-    @commands.command(help='kick a user')
+    @commands.command(help='Kicks a user')
     async def kick(self, ctx: commands.Context, user: discord.User) -> None:
         await ctx.send('Not Implemented')
         raise NotImplementedError()
 
-    @commands.command(help='mute a user')
+    @commands.command(help='Mutes a user')
     async def mute(self, ctx: commands.Context, user: discord.User) -> None:
         await ctx.send('Not Implemented')
         raise NotImplementedError()
