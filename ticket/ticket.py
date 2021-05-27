@@ -1,10 +1,8 @@
+import time
 from typing import Any, Optional, Union
 
 import discord
 from discord.ext import commands
-
-SOURCE_LINK = 'https://github.com/XxMidasTouchxX/HoneyComb.git'
-SUPPORT_SERVER = 'https://discord.gg/ZAM9M2ChBE'
 
 class TicketEmbed(discord.Embed):
 
@@ -34,7 +32,11 @@ class TicketManager(commands.Cog):
         print(f'Setup channel is {self.setup_channel}')
         if self.setup_channel is None:
             return
-        await self.setup_channel.send('Am I spamming?')
+        await self.setup_channel.send('bruh')
+        time.sleep(20)
+        for _ in range(20):
+            await self.setup_channel.send('bruh')
+            time.sleep(1)
 
     @commands.command(help='Say hi')
     async def hi(self, ctx: commands.Context) -> None:
@@ -47,18 +49,6 @@ class TicketManager(commands.Cog):
         else:
             self.__setup_user = ctx.author
             await ctx.send('Which channel would you like me to set up in?')
-
-    @commands.command(help='Link source code')
-    async def source(self, ctx: commands.Context) -> None:
-        embed = TicketEmbed(
-            title='Check out my source code!',
-            url=SOURCE_LINK
-        )
-        await ctx.send(embed=embed)
-
-    @commands.command(help='Link support server', aliases=['su'])
-    async def support(self, ctx: commands.Context) -> None:
-        await ctx.send(SUPPORT_SERVER)
 
     @commands.Cog.listener()
     async def on_message(self, msg: discord.Message) -> None:
