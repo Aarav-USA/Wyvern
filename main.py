@@ -3,8 +3,9 @@
 import discord
 from discord.ext import commands
 
-BOT_PREFIX: str = 'hc!'
+BOT_PREFIX = 'hc!'
 
+bot= commands.Bot(BOT_PREFIX, intents=discord.Intents.all())
 bot.load_extension('info')
 bot.load_extension('moderation')
 bot.load_extension('ticket.ticket')
@@ -14,7 +15,8 @@ bot.load_extension('reaction')
 async def on_ready() -> None:
     print("The bot is now online")
     # Setting 'Watching status
-    await bot.change_presence(activity=discord. Activity(type=discord. ActivityType.watching, name='for @HoneyComb'))
+    await bot.change_presence(activity=discord.Activity(
+        type=discord.ActivityType.watching, name='for @HoneyComb'))
     print("----------------------------------------------")
 
 if __name__ == '__main__':
