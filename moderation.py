@@ -15,13 +15,12 @@ class Moderation(commands.Cog):
             return
         if reason is None:
             reason = 'We have decided you ban you out of our server!'
-        if ctx.guild is not None:
-            guild_str = ctx.guild.name
-        else:
-            guild_str = 'unknown guild'
-        message = f'You have been banned from {guild_str} for {reason}'
+        if ctx.guild is None:
+            await ctx.send('You can only use this command in a server.')
+            return
+        message = f'You have been banned from {ctx.guild.name} for {reason}'
         await user.send(message)
-        # await ctx.guild.ban(member, reason=reason)
+        await ctx.guild.ban(user, reason=reason)
         await ctx.channel.send(f'{user} is banned!')
 
     @commands.command(help='Kicks a user')
