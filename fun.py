@@ -1,3 +1,4 @@
+# Made by asger pushed by me
 import discord
 import random
 from discord.ext import commands
