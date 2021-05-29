@@ -6,8 +6,6 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-client = commands.Bot(command_prefix="hc!",intents=discord.Intents.all())
-
 @client.event
 async def on_ready():
     print('The bot is ready!')
