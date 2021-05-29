@@ -9,7 +9,8 @@ class Moderation(commands.Cog):
     #bans a user with a reason
     @commands.command()
     @commands.has_any_role('Administrators','Moderators,','Mods','Admins','Admin','Mod')
-    async def ban(self, ctx: commands.Context, user: discord.User, reason: str) -> None:
+    async def ban(self, ctx: commands.Context, user: discord.User, *,
+            reason: str) -> None:
         if user is None or user == ctx.message.author:
             await ctx.channel.send('You cannot ban yourself!')
             return
