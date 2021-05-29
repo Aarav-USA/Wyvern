@@ -18,8 +18,7 @@ class Moderation(commands.Cog):
         if ctx.guild is None:
             await ctx.send('You can only use this command in a server.')
             return
-        message = f'You have been banned from {ctx.guild.name}
-        Reason: {reason}'
+        message = f'You have been banned from {ctx.guild.name}                                                              Reason: {reason}'
         await user.send(message)
         await ctx.guild.ban(user, reason=reason)
         await ctx.channel.send(f'{user} is banned!')
