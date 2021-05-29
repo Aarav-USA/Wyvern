@@ -11,7 +11,6 @@ bot.load_extension('info')
 bot.load_extension('moderation')
 bot.load_extension('ticket.ticket')
 bot.load_extension('reaction')
-bot.load_extension('fun')
 
 @bot.event
 async def on_ready() -> None:
