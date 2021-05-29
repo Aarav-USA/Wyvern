@@ -3,7 +3,7 @@
 import discord
 from discord.ext import commands
 
-BOT_PREFIX = 'hc!'
+BOT_PREFIX = 'hc!', 'Hc!', 'HC!', 'hC!'
 
 bot= commands.Bot(discord.ext.commands.when_mentioned_or('hc!'),
     intents=discord.Intents.all())
