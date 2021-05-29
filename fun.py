@@ -6,10 +6,6 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-@client.event
-async def on_ready():
-    print('The bot is ready!')
-
 @client.command()
 async def avatar(ctx, member: discord.Member=None): 
   if member is None:
