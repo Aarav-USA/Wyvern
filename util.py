@@ -10,7 +10,7 @@ class HoneyCombEmbed(discord.Embed):
         self.colour = 0xFFD700
         
        #Prefix Anouncer
-    @client.event
+@client.event
 async def on_message(message):
     if message.content.startswith('@HoneyComb'):
         channel = message.channel
