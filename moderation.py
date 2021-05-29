@@ -11,7 +11,7 @@ class Moderation(commands.Cog):
     @commands.has_any_role('Administrators','Moderators,','Mods','Admins','Admin','Mod')
     async def ban(self, ctx: commands.Context, user: discord.User, reason: str) -> None:
         if user is None or user == ctx.message.author:
-            await ctx.channel.send('You cannot ban yourself')
+            await ctx.channel.send('You cannot ban yourself!')
             return
         if reason is None:
             reason = 'We have decided you ban you out of our server!'
