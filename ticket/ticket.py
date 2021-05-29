@@ -21,7 +21,17 @@ class TicketManager(commands.Cog):
         else:
             await ctx.send('No setup is in progress.')
 
-            @commands.command(help='Say hi')
+    async def __send_setup_message(self) -> None:
+        print(f'Setup channel is {self.setup_channel}')
+        if self.setup_channel is None:
+            return
+        await self.setup_channel.send('bruh')
+        time.sleep(20)
+        for _ in range(20):
+            await self.setup_channel.send('bruh')
+            time.sleep(1)
+
+    @commands.command(help='Say hi')
     async def hi(self, ctx: commands.Context) -> None:
         await ctx.send('Hi!')
 
