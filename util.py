@@ -12,6 +12,6 @@ class HoneyCombEmbed(discord.Embed):
        #Prefix Anouncer
 @client.event
 async def on_message(message):
-    if message.content.startswith = ('<@830310620054290473>'):
+    if message.content ('<@830310620054290473>'):
         channel = message.channel
         await channel.send('Robot Prefix: hc!')
