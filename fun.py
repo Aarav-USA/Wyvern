@@ -12,7 +12,7 @@ async def on_ready():
 async def avatar(ctx, member: discord.Member=None): 
   if member is None:
     member=ctx.author
-  favatar=discord.Embed(title=f"{member.name}'s avatar",color = discord.Colour.gold())
+  favatar=discord.Embed(title=f"{member.name}'s Avatar",color = discord.Colour.gold())
   favatar.set_footer(text=f"Requested by: {ctx.author.name}")
 
   favatar.set_image(url='{}'.format(member.avatar_url))
