@@ -10,8 +10,8 @@ class HoneyCombEmbed(discord.Embed):
         self.colour = 0xFFD700
         
        #Prefix Anouncer
-#@client.event
-#async def on_message(message):
-#    if message.content.startswith('@HoneyComb'):
-#        channel = message.channel
-#        await channel.send('Robot Prefix: hc!')
+@client.event
+async def on_message(message):
+    if message.content = ('<@830310620054290473>'):
+        channel = message.channel
+        await channel.send('Robot Prefix: hc!')
