@@ -3,9 +3,9 @@
 import discord
 from discord.ext import commands
 
-*BOT_PREFIXES = ('hc!', 'Hc!', 'HC!', 'hC!')
+BOT_PREFIXES = ('hc!', 'Hc!', 'HC!', 'hC!')
 
-bot= commands.Bot(discord.ext.commands.when_mentioned_or(BOT_PREFIXES),
+bot= commands.Bot(discord.ext.commands.when_mentioned_or(*BOT_PREFIXES),
     intents=discord.Intents.all())
 bot.load_extension('info')
 bot.load_extension('moderation')
