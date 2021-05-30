@@ -7,7 +7,7 @@ from os import system
 import datetime
 
 # Music Commands
-class Music(commands.Cog):
+class music(commands.Cog):
     
     # Runs when initializing the document in the cogs
     def __init__(self, client):
