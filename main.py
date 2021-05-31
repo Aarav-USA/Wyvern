@@ -3,14 +3,16 @@
 import discord
 from discord.ext import commands
 
-BOT_PREFIX = 'hc!'
+BOT_PREFIXES = ('hc!', 'Hc!', 'HC!', 'hC!')
 
-bot= commands.Bot(discord.ext.commands.when_mentioned_or('hc!'),
+bot= commands.Bot(discord.ext.commands.when_mentioned_or(*BOT_PREFIXES),
     intents=discord.Intents.all())
 bot.load_extension('info')
 bot.load_extension('moderation')
 bot.load_extension('ticket.ticket')
 bot.load_extension('reaction')
+bot.load_extension('fun')
+bot.load_extension('music')
 
 @bot.event
 async def on_ready() -> None:
