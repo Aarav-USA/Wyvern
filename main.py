@@ -3,10 +3,21 @@
 import discord
 from discord.ext import commands
 
-BOT_PREFIXES = ('hc!', 'Hc!', 'HC!', 'hC!')
+import configparser
 
-bot= commands.Bot(discord.ext.commands.when_mentioned_or(*BOT_PREFIXES),
-    intents=discord.Intents.all())
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+bot_prefixes = config['DEFAULT']['DefaultPrefixes'].split()
+if config['DEFAULT'].getboolean('AllowMentionPrefix'):
+    bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_prefixes),
+        intents=discord.Intents.all())
+else:
+    bot = commands.Bot(bot_prefixes, intents=discord.Intents.all())
+
+# Mypy doesn't understand an implicit setattr.
+setattr(bot, 'config', config)
+
 bot.load_extension('info')
 bot.load_extension('moderation')
 bot.load_extension('ticket.ticket')
@@ -23,8 +34,8 @@ async def on_ready() -> None:
     print("----------------------------------------------")
 
 if __name__ == '__main__':
-
-    with open('token.txt', 'r') as f:
-        token:str = f.readline().strip()
-
-    bot.run(token)
+    bot_token = config['auth']['BotToken']
+    if bot_token == 'REDACTED':
+        print('Please add your bot token to the auth section in config.ini')
+    else:
+        bot.run(bot_token)
