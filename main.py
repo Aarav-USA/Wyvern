@@ -11,9 +11,10 @@ config.read('config.ini')
 bot_prefixes = config['DEFAULT']['DefaultPrefixes'].split()
 if config['DEFAULT'].getboolean('AllowMentionPrefix'):
     bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_prefixes),
-        intents=discord.Intents.all())
+        intents=discord.Intents.all(), case_insensitive=True)
 else:
-    bot = commands.Bot(bot_prefixes, intents=discord.Intents.all())
+    bot = commands.Bot(bot_prefixes,
+        intents=discord.Intents.all(), case_insensitive=True)
 
 # Mypy doesn't understand an implicit setattr.
 setattr(bot, 'config', config)
