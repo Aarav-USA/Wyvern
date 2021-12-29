@@ -21,7 +21,7 @@
 - SourceURL: URL for source code.
 - SupportServer: Link to the bot support server.
 
-# Section auth
+# Section Auth
 Options in the auth section are REDACTED by default, and should be configured per user as desired.
 
 - BotToken: The token for your bot.
