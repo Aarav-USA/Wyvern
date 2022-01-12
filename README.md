@@ -28,4 +28,4 @@ Options in the auth section are REDACTED by default, and should be configured pe
 
 Note: Lack of a license is not an oversight; www.choosealicense.com/no-permission/ <br />
 
-Curated with ❤️ by [Aarav Batra](https://github.com/Aarav-Batra), [JosiahWI](https://github.com/JosiahWI), and [Asger111](https://github.com/Asger111)
+Curated with ❤️ by [Aarav Batra](https://github.com/Aarav-USA), [JosiahWI](https://github.com/JosiahWI), and [Asger111](https://github.com/Asger111)
