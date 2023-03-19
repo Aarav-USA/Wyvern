@@ -25,6 +25,7 @@ bot.load_extension('ticket.ticket')
 bot.load_extension('reaction')
 bot.load_extension('suicide_prevention.suicide_prevention')
 bot.load_extension('fun')
+bot.load_extension('welcome')
 
 @bot.event
 async def on_ready() -> None:
