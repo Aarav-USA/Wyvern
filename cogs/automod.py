@@ -12,8 +12,8 @@ class AutoMod(commands.Cog):
         self.max_emoji = 5
         self.max_spoilers = 3
         self.max_mentions = 5
-        self.ignore_roles = [1234567890, 0987654321] # list of role IDs to ignore
-        self.ignore_channels = [1234567890, 0987654321] # list of channel IDs to ignore
+        self.ignore_roles = [1234567890, 0987654321] # ignore roles
+        self.ignore_channels = [1234567890, 0987654321] # ignore channels
         self.action = 'warn_delete' # 'disable', 'warn', 'delete', 'warn_delete'
         self.warn_message = 'Please refrain from using inappropriate language or spamming.'
         self.delete_message = 'Your message has been deleted due to inappropriate content or spamming.'
