@@ -8,7 +8,6 @@ class WelcomeGoodbye(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        # Set up welcome message and role to give
         welcome_channel = self.wyvern.get_channel(123456789012345678)
         welcome_message = f"Welcome to the server, {member.display_name}! Please read the rules and enjoy your stay."
         role_to_give = member.guild.get_role(123456789012345678)
@@ -22,7 +21,6 @@ class WelcomeGoodbye(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
-        # Set up goodbye message
         goodbye_channel = self.wyvern.get_channel(123456789012345678)
         goodbye_message = f"{member.name} has left the server. Goodbye!"
 
