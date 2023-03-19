@@ -32,7 +32,7 @@ async def on_ready() -> None:
     print("The bot is now online")
     # Setting 'Watching status
     await bot.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.watching, name='for @HoneyComb'))
+        type=discord.ActivityType.watching, name='for @Wyvern'))
     print("----------------------------------------------")
 
 if __name__ == '__main__':
