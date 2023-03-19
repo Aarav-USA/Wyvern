@@ -1,6 +1,6 @@
-# HoneyComb
+# Wyvern
 
-- Welcome to this repository, this is the official code for the HoneyComb Discord robot! Support us at https://discord.gg/Rb9ZDmH89c or get support at https://discord.gg/ZAM9M2ChBE.
+- Welcome to this repository, this is the official code for the Wyvern Discord robot! Get support at https://discord.gg/Pb2zCAXPHs.
 
 # TicketManager
 
@@ -25,7 +25,5 @@
 Options in the auth section are REDACTED by default, and should be configured per user as desired.
 
 - BotToken: The token for your bot.
-
-Note: Lack of a license is not an oversight; www.choosealicense.com/no-permission/ <br />
 
 Curated with ❤️ by [Aarav-USA](https://github.com/Aarav-USA), [JosiahWI](https://github.com/JosiahWI), and [Asger111](https://github.com/Asger111)
