@@ -21,50 +21,49 @@ else:
 setattr(bot, 'config', config)
 
 cogs = [
-    'afk',
-    'altraider',
-    'auditlog',
-    'automod',
-    'nitroperk',
-    'bulletin',
-    'captcha',
-    'channels',
-    'courier',
-    'customcmd',
-    'embed',
-    'emoji',
-    'entertainment',
-    'form',
-    'fun',
-    'giveaway',
-    'help',
-    'information',
-    'invitetrack',
-    'level',
-    'moneygame',
-    'music',
-    'platformalert',
-    'profile',
-    'reaction',
-    'reactionrole',
-    'serverlayout',
+    # 'afk',
+    # 'altraider',
+    # 'auditlog',
+    # 'automod',
+    # 'nitroperk',
+    # 'bulletin',
+    # 'captcha',
+    # 'channels',
+    # 'courier',
+    # 'customcmd',
+    # 'embed',
+    # 'emoji',
+    # 'entertainment',
+    # 'form',
+    # 'fun',
+    # 'giveaway',
+    # 'help',
+    # 'information',
+    # 'invitetrack',
+    # 'level',
+    # 'moneygame',
+    # 'music',
+    # 'platformalert',
+    # 'profile',
+    # 'reaction',
+    # 'reactionrole',
+    # 'serverlayout',
     'serverstat',
-    'tempchannel',
-    'utility',
-    'voicemail',
-    'welcomegoodbye',
-    'wordrace'
+    # 'tempchannel',
+    # 'utility',
+    # 'voicemail',
+    # 'welcomegoodbye',
+    # 'wordrace'
     ]
 
 name = 'Wyvern: '
 async def load_all_cogs():
     for extension in cogs:
         try:
-            async with bot:
-                await bot.load_extension("cogs." + extension)
-                print(name + f'Loaded {extension} cog.')
-        except Exception:
-            print(name + f'Error loading {extension} cog: {str(Exception)}')
+            await bot.load_extension("cogs." + extension)
+            print(name + f'Loaded {extension} cog.')
+        except Exception as e:
+            print(name + f'Error loading {extension} cog: {str(e)}')
 
 @bot.event
 async def on_ready() -> None:
@@ -75,15 +74,14 @@ async def on_ready() -> None:
     print("-" * 47)
 
 async def main():
-    if __name__ == '__main__':
-        try:
-            await load_all_cogs()
-            await bot.start(config['auth']['BotToken'])
-        except KeyboardInterrupt:
-            print(name + "Keyboard interrupt, closing application.")
-        except Exception as e:
-            print(name + f"Error while running: '{e}'")
-        finally:
-            await bot.close()
+    try:
+        await bot.start(config['auth']['BotToken'])
+    except KeyboardInterrupt:
+        print(name + "Keyboard interrupt, closing application.")
+    except Exception as e:
+        print(name + f"Error while running: '{e}'")
+    finally:
+        async with bot:
+            await bot.logout()
 
 asyncio.run(main())

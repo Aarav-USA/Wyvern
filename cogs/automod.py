@@ -1,4 +1,6 @@
 import discord
+# pip install emoji
+import emoji
 from discord.ext import commands
 
 class AutoMod(commands.Cog):
@@ -100,7 +102,7 @@ class AutoMod(commands.Cog):
         count = sum(1 for c in message.content if c in emoji.UNICODE_EMOJI)
         if count > self.max_emoji:
             return True
-return False
+        return False
 
     def check_excessive_spoilers(self, message):
         count = message.content.count('||')
@@ -147,8 +149,7 @@ return False
             await ctx.send(f'Current action: {self.action}')
         elif action in ['disable', 'warn', 'delete', 'warn_delete', 'ban', 'kick', 'mute']:
             self.action = action
-            await ctx.send(f'Action set
-to: {self.action}')
+            await ctx.send(f'Action set to: {self.action}')
         else:
             await ctx.send('Invalid action.')
 
