@@ -1,6 +1,6 @@
 [![Wyvern][Discord.gg]][Discord-url]
 # Wyvern | The Everything Discord Bot
-Wyvern is an intuitive mainstream Discord bot geared towards integrating itself in every Discord server with modularity, speed, efficiency, and transparency.
+Wyvern is an intuitive mainstream Discord bot geared towards integrating itself in every Discord server of open-source nature with modularity, speed, and efficiency.
 
 ## TicketManager
 - HoneyComb contains a WIP ticket bot/cog.
