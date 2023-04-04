@@ -23,7 +23,7 @@ Options in the auth section are REDACTED by default, and should be configured pe
 - BotToken: The token for your bot.
 
 
-# Credits
+## Credits
 Curated with ❤️ by [Aarav-USA](https://github.com/Aarav-USA), [JosiahWI](https://github.com/JosiahWI), and [Asger111](https://github.com/Asger111)
 
 <!-- 
