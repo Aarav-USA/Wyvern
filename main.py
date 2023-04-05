@@ -54,30 +54,30 @@ cogs = [
     # 'voicemail',
     ]
 
-name = 'Wyvern: '
+name = bot.user.name + ":"
 async def load_all_cogs():
     for extension in cogs:
         try:
             await bot.load_extension("cogs." + extension)
-            print(name + f'Loaded {extension} cog.')
+            print(f'{name} Loaded {extension} cog.')
         except Exception as e:
-            print(name + f'Error loading {extension} cog: {str(e)}')
+            print(f'{name} Error loading {extension} cog: {str(e)}')
 
 @bot.event
 async def on_ready() -> None:
-    print("The bot is now online")
+    print(f"{name} has successfully connected to ")
     # Setting 'Watching' status
     await bot.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.watching, name='for @Wyvern'))
+        type=discord.ActivityType.watching, name=f'for @{name}'))
     print("-" * 47)
 
 async def main():
     try:
         await bot.start(config['auth']['BotToken'])
     except KeyboardInterrupt:
-        print(name + "Keyboard interrupt, closing application.")
+        print(f"{name} Keyboard interrupt, disconnecting...")
     except Exception as e:
-        print(name + f"Error while running: '{e}'")
+        print(f"{name} Error while running: '{e}'")
     finally:
         async with bot:
             await bot.logout()
