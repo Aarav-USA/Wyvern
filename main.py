@@ -9,12 +9,12 @@ import asyncio
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-bot_prefixes = config['DEFAULT']['DefaultPrefixes'].split()
+bot_mention = "@Wyvern"
 if config['DEFAULT'].getboolean('AllowMentionPrefix'):
-    bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_prefixes),
+    bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_mention),
         intents=discord.Intents.all(), case_insensitive=True)
 else:
-    bot = commands.Bot(bot_prefixes,
+    bot = commands.Bot(bot_mention,
         intents=discord.Intents.all(), case_insensitive=True)
 
 # Mypy doesn't understand an implicit setattr.
@@ -65,17 +65,17 @@ async def load_all_cogs():
 
 @bot.event
 async def on_ready() -> None:
-    print(f"{name} has successfully connected to ")
+    print(f"{name} Successfully connected to Discord.")
     # Setting 'Watching' status
     await bot.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.watching, name=f'for @{name}'))
+        type=discord.ActivityType.watching, name=f'for @Wyvern'))
     print("-" * 47)
 
 async def main():
     try:
         await bot.start(config['auth']['BotToken'])
     except KeyboardInterrupt:
-        print(f"{name} Keyboard interrupt, disconnecting...")
+        print(f"{name} Keyboard interrupted, disconnecting...")
     except Exception as e:
         print(f"{name} Error while running: '{e}'")
     finally:
