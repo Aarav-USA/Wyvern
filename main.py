@@ -54,7 +54,7 @@ cogs = [
     # 'voicemail',
     ]
 
-name = bot.user.name + ":"
+name = 'Wyvern:'
 async def load_all_cogs():
     for extension in cogs:
         try:
