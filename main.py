@@ -56,14 +56,14 @@ cogs = [
     # 'voicemail',
     ]
 
-name = config['INFO'].getboolean('BotName')
+name = config['INFO'].getboolean('BotName') + ":"
 async def load_all_cogs():
     for extension in cogs:
         try:
             await bot.load_extension("cogs." + extension)
             print(f'{name} Loaded {extension} cog.')
-        except Exception as e:
-            print(f'{name} Error loading {extension} cog: {str(e)}')
+        except Exception as error:
+            print(f'{name} Error loading {extension} cog: {error}')
 
 @bot.event
 async def on_ready() -> None:
@@ -76,14 +76,14 @@ async def main():
     try:
         await bot.start(config['AUTH']['BotToken'])
     except KeyboardInterrupt:
-        print(name + "Keyboard interrupt, closing application.")
-    except Exception as e:
-        print(name + f"Error while running: '{e}'")
+        print(f"{name} Keyboard interrupted, disconnecting.")
+    except Exception as error:
+        print(f"{name} Error while running: '{error}'")
     finally:
         async with bot:
             await bot.logout()
 
 if config['AUTH'].get('BotToken') == "REDACTED":
-    raise Exception(f"{name} Configure your bot token in 'config.ini', and try again.")
+    raise Exception(f"{name} Configure your token in 'config.ini', try again.")
 else:
     asyncio.run(main())
