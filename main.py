@@ -39,7 +39,7 @@ cogs = [
     # 'form',
     # 'fun',
     # 'giveaway',
-    # 'help',
+    'utility.help',
     # 'information',
     # 'invitemonitor',
     # 'joinleave',
@@ -56,7 +56,7 @@ cogs = [
     # 'voicemail',
     ]
 
-name = config['INFO'].getboolean('BotName') + ":"
+name = config['INFO'].get('BotName') + ":"
 async def load_all_cogs():
     for extension in cogs:
         try:
@@ -64,6 +64,7 @@ async def load_all_cogs():
             print(f'{name} Loaded {extension} cog.')
         except Exception as error:
             print(f'{name} Error loading {extension} cog: {error}')
+asyncio.run(load_all_cogs())
 
 @bot.event
 async def on_ready() -> None:
