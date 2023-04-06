@@ -9,16 +9,13 @@ import asyncio
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-bot_mention = '@Wyvern'
-name = 'Wyvern:'
+bot_prefixes = config['DEFAULT']['DefaultPrefixes'].split()
 if config['DEFAULT'].getboolean('AllowMentionPrefix'):
-    bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_mention),
+    bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_prefixes),
         intents=discord.Intents.all(), case_insensitive=True)
-    print(f'{name} Mention prefix is allowed.')
 else:
-    bot = commands.Bot(bot_mention,
+    bot = commands.Bot(bot_prefixes,
         intents=discord.Intents.all(), case_insensitive=True)
-    print(f'{name} Mention prefix is not allowed.')
 
 # Mypy doesn't understand an implicit setattr.
 setattr(bot, 'config', config)
@@ -57,29 +54,30 @@ cogs = [
     # 'voicemail',
     ]
 
+name = 'Wyvern: '
 async def load_all_cogs():
     for extension in cogs:
         try:
-            await bot.load_extension('cogs.' + extension)
-            print(f'{name} Loaded {extension} cog.')
+            await bot.load_extension("cogs." + extension)
+            print(name + f'Loaded {extension} cog.')
         except Exception as e:
-            print(f'{name} Error loading {extension} cog: {str(e)}')
+            print(name + f'Error loading {extension} cog: {str(e)}')
 
 @bot.event
 async def on_ready() -> None:
-    print(f'{name} Successfully connected to Discord.')
+    print("The bot is now online")
     # Setting 'Watching' status
     await bot.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.watching, name=f'for @Wyvern'))
+        type=discord.ActivityType.watching, name='for @Wyvern'))
     print("-" * 47)
 
 async def main():
     try:
         await bot.start(config['auth']['BotToken'])
     except KeyboardInterrupt:
-        print(f'{name} Keyboard interrupted, disconnecting...')
+        print(name + "Keyboard interrupt, closing application.")
     except Exception as e:
-        print(f"{name} Error while running: '{e}'")
+        print(name + f"Error while running: '{e}'")
     finally:
         async with bot:
             await bot.logout()
