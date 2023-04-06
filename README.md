@@ -1,5 +1,6 @@
 [![Wyvern][Discord.gg]][Discord-url]
 [![Wyvern][GitHub.com]][GitHub-url]
+
 # Wyvern | The Everything Discord Bot
 Wyvern is an intuitive mainstream Discord bot geared towards integrating itself in every Discord server of open-source nature with modularity, speed, and efficiency.
 
