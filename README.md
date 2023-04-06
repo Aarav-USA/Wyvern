@@ -16,11 +16,14 @@ Bot setup documentation for `config.ini`.
 
 ### Section DEFAULT
 - AllowMentionPrefix: Whether mentioning the bot should act as a prefix.
-- DefaultPrefixes: Space seperated list of default bot prefixes.
+- ThemeColor: Theme color for your bot
+
+### Section INFO
+- BotName: Name of your bot
 - SourceURL: URL for source code.
 - SupportServer: Link to the bot support server.
 
-### Section Auth
+### Section AUTH
 Options in the auth section are REDACTED by default, and should be configured per user as desired.
 - BotToken: The token for your bot.
 
