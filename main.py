@@ -15,7 +15,7 @@ intents = discord.Intents.all()
 if config['DEFAULT'].getboolean('SlashCommands'):
     if config['DEFAULT'].getboolean('AllowMentionPrefix'):
         bot = commands.Bot(command_prefix=commands.when_mentioned,
-                        intents=intents)
+            intents=intents)
     else:
         bot = commands.Bot(intents=intents)
 else:
