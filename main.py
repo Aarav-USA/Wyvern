@@ -9,22 +9,15 @@ import asyncio
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-bot_prefixes = config['DEFAULT']['DefaultPrefixes'].split()
-intents = discord.Intents.all()
+if config['DEFAULT'].getboolean('AllowMentionPrefix'):
+    command_prefix = command_prefix=commands.when_mentioned
 
-if config['DEFAULT'].getboolean('SlashCommands'):
-    if config['DEFAULT'].getboolean('AllowMentionPrefix'):
-        bot = commands.Bot(command_prefix=commands.when_mentioned,
-            intents=intents)
-    else:
-        bot = commands.Bot(intents=intents)
 else:
-    if config['DEFAULT'].getboolean('AllowMentionPrefix'):
-        bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_prefixes),
-        intents=discord.Intents.all(), case_insensitive=True)
-    else:
-        bot = commands.Bot(bot_prefixes,
-            intents=intents, case_insensitive=True)
+    command_prefix = None
+
+bot = commands.Bot(command_prefix=command_prefix,
+    intents=discord.Intents.all(),
+    case_insensitive=True)
 
 # mypy doesnt understand an implicit setattr
 setattr(bot, 'config', config)
@@ -77,7 +70,7 @@ async def on_ready() -> None:
     # Setting 'Watching' status
     await bot.change_presence(activity=discord.Activity(
         type=discord.ActivityType.watching, name='for @Wyvern'))
-    print(name + "Successfully connected to Discord.\n" + "-" * 47)
+    print(name + "Successfully connected to Discord.\n" + "-" * 37)
 
 async def main():
     try:
