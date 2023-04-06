@@ -10,14 +10,23 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 bot_prefixes = config['DEFAULT']['DefaultPrefixes'].split()
-if config['DEFAULT'].getboolean('AllowMentionPrefix'):
-    bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_prefixes),
-        intents=discord.Intents.all(), case_insensitive=True)
-else:
-    bot = commands.Bot(bot_prefixes,
-        intents=discord.Intents.all(), case_insensitive=True)
+intents = discord.Intents.all()
 
-# Mypy doesn't understand an implicit setattr.
+if config['DEFAULT'].getboolean('SlashCommands'):
+    if config['DEFAULT'].getboolean('AllowMentionPrefix'):
+        bot = commands.Bot(command_prefix=commands.when_mentioned,
+                        intents=intents)
+    else:
+        bot = commands.Bot(intents=intents)
+else:
+    if config['DEFAULT'].getboolean('AllowMentionPrefix'):
+        bot = commands.Bot(discord.ext.commands.when_mentioned_or(*bot_prefixes),
+        intents=discord.Intents.all(), case_insensitive=True)
+    else:
+        bot = commands.Bot(bot_prefixes,
+            intents=intents, case_insensitive=True)
+
+# mypy doesnt understand an implicit setattr
 setattr(bot, 'config', config)
 
 cogs = [
@@ -65,15 +74,14 @@ async def load_all_cogs():
 
 @bot.event
 async def on_ready() -> None:
-    print("The bot is now online")
     # Setting 'Watching' status
     await bot.change_presence(activity=discord.Activity(
         type=discord.ActivityType.watching, name='for @Wyvern'))
-    print("-" * 47)
+    print(name + "Successfully connected to Discord.\n" + "-" * 47)
 
 async def main():
     try:
-        await bot.start(config['auth']['BotToken'])
+        await bot.start(config['AUTH']['BotToken'])
     except KeyboardInterrupt:
         print(name + "Keyboard interrupt, closing application.")
     except Exception as e:
@@ -82,4 +90,7 @@ async def main():
         async with bot:
             await bot.logout()
 
-asyncio.run(main())
+if config['AUTH'].get('BotToken') == "REDACTED":
+    raise Exception(name + "Configure your bot token in 'config.ini', and try again.")
+else:
+    asyncio.run(main())
