@@ -56,21 +56,21 @@ cogs = [
     # 'voicemail',
     ]
 
-name = 'Wyvern: '
+name = config['INFO'].getboolean('BotName')
 async def load_all_cogs():
     for extension in cogs:
         try:
             await bot.load_extension("cogs." + extension)
-            print(name + f'Loaded {extension} cog.')
+            print(f'{name} Loaded {extension} cog.')
         except Exception as e:
-            print(name + f'Error loading {extension} cog: {str(e)}')
+            print(f'{name} Error loading {extension} cog: {str(e)}')
 
 @bot.event
 async def on_ready() -> None:
     # Setting 'Watching' status
     await bot.change_presence(activity=discord.Activity(
         type=discord.ActivityType.watching, name='for @Wyvern'))
-    print(name + "Successfully connected to Discord.\n" + "-" * 37)
+    print(f"{name} Successfully connected to Discord.\n" + "-" * 37)
 
 async def main():
     try:
@@ -84,6 +84,6 @@ async def main():
             await bot.logout()
 
 if config['AUTH'].get('BotToken') == "REDACTED":
-    raise Exception(name + "Configure your bot token in 'config.ini', and try again.")
+    raise Exception(f"{name} Configure your bot token in 'config.ini', and try again.")
 else:
     asyncio.run(main())
