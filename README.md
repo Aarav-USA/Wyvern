@@ -1,4 +1,5 @@
 [![Wyvern][Discord.gg]][Discord-url]
+[![Wyvern][GitHub.com]][GitHub-url]
 # Wyvern | The Everything Discord Bot
 Wyvern is an intuitive mainstream Discord bot geared towards integrating itself in every Discord server of open-source nature with modularity, speed, and efficiency.
 
@@ -31,3 +32,5 @@ Badge Links
 -->
 [Discord.gg]: https://img.shields.io/badge/Wyvern%20Discord%20Server-2c2f33?logo=discord&logoColor=fff&color=5865F2&link=https://discord.gg/YX2Zse9DF4
 [Discord-url]: https://discord.gg/YX2Zse9DF4
+[GitHub.com]: https://img.shields.io/badge/Wyvern%20GitHub%20Repository-2c2f33?logo=github&logoColor=fff&color=171515&link=https://github.com/Aarav-USA/Wyvern
+[GitHub-url]: https:/github.com/Aarav-USA/Wyvern
