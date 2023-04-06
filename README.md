@@ -16,7 +16,7 @@ Bot setup documentation for `config.ini`.
 
 ### Section DEFAULT
 - AllowMentionPrefix: Whether mentioning the bot should act as a prefix.
-- ThemeColor: Theme color for your bot
+- ThemeColor: Theme (hex) color for your bot
 
 ### Section INFO
 - BotName: Name of your bot
