@@ -16,10 +16,10 @@ Bot setup documentation for `config.ini`.
 
 ### Section DEFAULT
 - AllowMentionPrefix: Whether mentioning the bot should act as a prefix.
-- ThemeColor: Theme (hex) color for your bot `ThemeColor: 000000`, do not include a '#' for the hex color
 
 ### Section INFO
 - BotName: Name of your bot
+- ThemeColor: Theme (hex) color for your bot `ThemeColor: 000000`, do not include a '#' for the hex color
 - SourceURL: URL for source code.
 - SupportServer: Link to the bot support server.
 
@@ -28,7 +28,7 @@ Options in the auth section are REDACTED by default, and should be configured pe
 - BotToken: The token for your bot.
 
 
-## Credits
+## Authors
 Curated with ❤️ by [Aarav-USA](https://github.com/Aarav-USA), [JosiahWI](https://github.com/JosiahWI), and [Asger111](https://github.com/Asger111)
 
 <!-- 
