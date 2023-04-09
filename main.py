@@ -9,7 +9,7 @@ import asyncio
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-# prefix required for slash commands to initialize
+# prefix required for bot to initialize
 command_prefix = commands.when_mentioned
 
 if config['AUTH'].get('AppId') == "REDACTED":
@@ -37,6 +37,7 @@ async def load_all_cogs():
         except Exception as error:
             print(f'{botname}: Error loading {extension} cog: {error}')
     await bot.tree.sync()
+    print(f"{botname}: Successfully synced slash commands.")
 
 @bot.event
 async def on_ready() -> None:
